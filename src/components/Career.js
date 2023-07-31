@@ -1,6 +1,5 @@
 import React from 'react';
 import '../style.css';
-import Contact from './Contact';
 import Footer from './Footer';
 
 const Career = () => {
@@ -41,7 +40,6 @@ const Career = () => {
           </ul>
         </div>
       </div>
-      <Contact />
       <Footer />
     </>
   );

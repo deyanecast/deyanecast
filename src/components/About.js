@@ -13,7 +13,7 @@ const About = () => {
           <p className="about-text-text">I am Deyane, a young mother from Guatemala with a great interest in life, science and technology. I am passionate about learning about new developments in these fields and am committed to using my knowledge and skills to make a positive difference in my community and the world. My goal is to build something that can help future generations to prosper and have a better future.</p> 
         </div>
         <div className="about-photo">
-          <img src={myPhoto} alt="Yo" /> {/* Coloca aquí tu imagen */}
+          <img src={myPhoto} alt="Yo" />
         </div>
       </div>
       <Career /> 

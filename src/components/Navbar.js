@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../style.css';
-import { Link as LinkScroll } from 'react-scroll';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -16,39 +16,13 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
-      <LinkScroll
-        to="home"
-        spy={true}
-        smooth={true}
-        offset={-70}
-        duration={500}>
+      <Link to="/">
           <h1>Portfolio</h1>
-      </LinkScroll>
+      </Link>
       <nav>
-        <LinkScroll
-          to="home"
-          spy={true}
-          smooth={true}
-          offset={-70}
-          duration={500}>
-          Home
-        </LinkScroll>
-        <LinkScroll
-          to="about"
-          spy={true}
-          smooth={true}
-          offset={-70}
-          duration={500}>
-          About
-        </LinkScroll>
-        <LinkScroll
-          to="career"
-          spy={true}
-          smooth={true}
-          offset={-70}
-          duration={500}>
-          Career
-        </LinkScroll>
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+        <Link to="/contact">Contact</Link>
       </nav>
     </div>
   );
