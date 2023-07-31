@@ -17,7 +17,7 @@ const Footer = () => {
       <a href="mailto:deyanecast@gmail.com" className="gmail social">
         <FontAwesomeIcon icon={faEnvelope} size="2x" />
       </a>
-      <a href="https://www.github.com/deyaneiracast" className="github social">
+      <a href="https://www.github.com/deyanecast" className="github social">
         <FontAwesomeIcon icon={faGithub} size="2x" />
       </a>
       <a href="https://www.twitter.com/deyaneiracast" className="twitter social">
