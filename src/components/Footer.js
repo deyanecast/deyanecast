@@ -14,23 +14,23 @@ import '../style.css';
 const Footer = () => {
   return (
     <div className="footer">
-      <a href="mailto:youremail@gmail.com" className="gmail social">
+      <a href="mailto:deyanecast@gmail.com" className="gmail social">
         <FontAwesomeIcon icon={faEnvelope} size="2x" />
       </a>
-      <a href="https://www.github.com/yourusername" className="github social">
+      <a href="https://www.github.com/deyaneiracast" className="github social">
         <FontAwesomeIcon icon={faGithub} size="2x" />
       </a>
-      <a href="https://www.twitter.com/yourusername" className="twitter social">
+      <a href="https://www.twitter.com/deyaneiracast" className="twitter social">
         <FontAwesomeIcon icon={faTwitter} size="2x" />
       </a>
       <a
-        href="https://www.linkedin.com/in/yourusername"
+        href="https://www.linkedin.com/in/deyanecast"
         className="linkedin social"
       >
         <FontAwesomeIcon icon={faLinkedin} size="2x" />
       </a>
       <a
-        href="https://www.instagram.com/yourusername"
+        href="https://www.instagram.com/deyaneiracast"
         className="instagram social"
       >
         <FontAwesomeIcon icon={faInstagram} size="2x" />
