@@ -1,31 +1,30 @@
-/* styles.css */
-
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Press Start 2P', cursive;
-  padding-top: 60px; /* Ajusta este valor a la altura de tu navbar */
+  padding-top: 60px;
+  overflow-x: hidden; /* Esto evitará el desplazamiento horizontal */
 }
 
 .navbar {
-  position: fixed; /* o sticky si prefieres */
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%; /* Asegura que la navbar cubra todo el ancho */
+  width: 100%;
   display: flex;
   justify-content: space-between;
   padding: 10px;
   background-color: #333;
-  z-index: 1000; /* Esto garantiza que la navbar esté por encima de los demás elementos de la página */
+  z-index: 1000; 
 }
 
 .navbar nav {
   display: flex;
   justify-content: space-around;
-  margin-top: 2%;
   width: 45%;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
+  align-content: center;
 }
 
 .navbar a {
@@ -33,37 +32,32 @@ body {
   text-decoration: none;
 }
 
-/* Home styles */
 .home-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 80vh;  /* Aquí cambié 'height' por 'min-height' */
-  background-color: #f8f9fa;
-}
-
-/* Projects styles */
-.projects-container { /* Agrega este nuevo selector */
   min-height: 80vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background-color: #f8f9fa;
+  flex-direction: column; /* Añadido para centrar verticalmente el contenido */
 }
 
 .home-title {
   font-size: 2em;
   color: #333;
+  text-align: center; /* Añadido para centrar el texto */
 }
 
 .home-text {
   font-size: 1em;
   color: #666;
+  text-align: center; /* Añadido para centrar el texto */
+  max-width: 800px; /* Añadido para controlar el ancho del texto */
 }
 
-/* Footer styles */
 .footer {
   position: static;
   left: 0;
+  right: 0; /* Asegura que el footer tenga un ancho del 100% */
   bottom: 0;
   width: 100%;
   background-color: #333;
@@ -72,15 +66,20 @@ body {
   padding: 10px;
 }
 
-.social {
-  margin: 0 1em;
-  color: white;
-  text-decoration: none;
+.full-screen {
+  min-height: calc(100vh - 70px); /* Ajusta este valor según la altura de tu navbar y footer */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-/* Media Queries */
+.social {
+  margin: 0 0.5em; /* Ajusta los márgenes para asegurar que los iconos no salgan de la ventana gráfica */
+  color: #fff; /* o cualquier color que quieras usar */
+
+}
+
 @media screen and (max-width: 768px) {
-  /* Reduce font sizes on smaller screens */
   .home-title {
     font-size: 1.5em;
   }
@@ -89,16 +88,13 @@ body {
     font-size: 0.75em;
   }
 
-  /* Change layout of Navbar on smaller screens */
   .navbar {
     flex-direction: column;
   }
 
-  .nav-links {
-    flex-direction: column;
-    align-items: center;
+  .navbar nav {
+    width: 100%;
   }
-
 }
 
 .projects-container {
@@ -119,28 +115,25 @@ body {
 }
 
 .project-frame {
-  width: 45%; /* Ajusta este valor para cambiar el tamaño del iframe */
-  height: 300px; /* Ajusta este valor para cambiar la altura del iframe */
+  width: 45%;
+  height: 300px;
   border: none;
 }
 
-/* Ajustar el tamaño de los iframes en pantallas más pequeñas */
 @media screen and (max-width: 768px) {
   .project-frame {
-    width: 95%; /* Ajusta este valor para cambiar el tamaño del iframe en pantallas más pequeñas */
+    width: 95%;
     margin-bottom: 20px;
   }
 }
-
-/* styles.css */
 
 .career-container {
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
   padding: 20px;
-  padding-top: 100px; /* Incrementa este valor a la altura que deseas */
-  max-width: 1200px; 
+  padding-top: 100px; 
+  max-width: 1200px;
 }
 
 .career-text-container {
@@ -155,18 +148,12 @@ body {
   gap: 20px;
 }
 
-@media screen and (min-width: 769px) {
-  .career-list-container {
-    flex-direction: row; 
-  }
-}
-
 @media screen and (max-width: 768px) {
   .career-container {
     flex-direction: column;
   }
 
-  .career-text-container, .list-container {
+  .career-text-container, .career-list-container {
     margin-right: 0;
     margin-bottom: 20px;
   }
@@ -176,25 +163,21 @@ body {
   }
 }
 
-/* styles.css */
-
 .list-container {
   flex: 1;
   padding: 20px;
 }
 
 .list-container ul {
-  list-style-type: none; /* elimina los marcadores de lista predeterminados */
+  list-style-type: none;
   padding: 0;
 }
 
 .list-container li {
-  margin-bottom: 10px; /* añade un espacio entre los elementos de la lista */
+  margin-bottom: 10px;
   padding: 10px;
-  border: 1px solid #ccc; /* añade un borde a cada elemento de la lista */
+  border: 1px solid #ccc;
 }
-
-/* styles.css */
 
 .experience {
   display: flex;
@@ -207,34 +190,11 @@ body {
   min-height: 80vh; 
 }
 
-.experience-title {
-  font-size: 2.5em;
-  color: #333333;
-  margin-bottom: 30px;
-  text-align: left;
-}
-
-.experience-description {
-  margin-bottom: center;
-  text-align: left;
-}
-
 .experience-item {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   margin-bottom: 20px;
-}
-
-.experience-item h2 {
-  font-size: 1.8em;
-  color: #666666;
-  margin-bottom: 10px;
-}
-
-.experience-item p {
-  font-size: 1em;
-  color: #888888;
 }
 
 .job-info {
@@ -260,14 +220,12 @@ body {
   }
 }
 
-/* styles.css */
-
 .about {
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
   padding: 20px;
-  padding-top: 100px; /* Toma en cuenta la altura de tu navbar, añadiendo su altura más el padding original */
+  padding-top: 100px;
   max-width: 1200px;
   min-height: 80vh;
 }
@@ -278,24 +236,12 @@ body {
   color:#666666;
 }
 
-.about-text-title{
-  color: #333333;
-}
-
-.about-text-text {
-  color: #333333;
-  text-align: left;  /* Alinea el texto a la izquierda */
-  line-height: 1.5; /* Aumenta el espaciado entre líneas para mejorar la legibilidad */
-  padding: 20px; /* Añade espacio alrededor del texto */
-}
-
 .about-photo img {
   width: 100%;
   height: auto;
   object-fit: cover;
 }
 
-/* Asegura que el texto se mantenga en la izquierda de la pantalla en todos los tamaños de pantalla */
 @media screen and (max-width: 768px) {
   .about {
     flex-direction: column;
@@ -307,75 +253,76 @@ body {
 }
 
 .contact-container {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  max-width: 800px;
+  margin: auto;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: nowrap;
 }
 
-.contact-title {
-  font-size: 2.5rem;
+.contact-title,
+.contact-subtitle {
   color: #333;
   text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-.contact-subtitle {
-  font-size: 1.2rem;
-  color: #666;
-  text-align: center;
-  margin-bottom: 2rem;
+  padding: 0.5em 0;
 }
 
 .contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  width: 100%;
 }
 
 .contact-form-row {
   display: flex;
-  gap: 1rem;
+  justify-content: space-between;
+  margin-bottom: 1em;
 }
 
 .contact-form-field {
   flex: 1;
-  display: flex;
-  flex-direction: column;
+  margin-right: 1em;
+  margin-bottom: 1em;
 }
 
 .contact-form-label {
-  margin-bottom: 0.5rem;
+  display: block;
+  font-size: 0.9em;
+  margin-bottom: 0.5em;
 }
 
 .contact-form-input,
 .contact-form-textarea {
-  padding: 0.5rem;
+  width: 100%;
+  padding: 0.5em;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 4px;
 }
 
 .contact-form-textarea {
-  min-height: 150px;
+  resize: vertical;
+  min-height: 100px;
 }
 
 .contact-form-submit {
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 5px;
+  width: 100%;
+  padding: 1em;
   background-color: #333;
-  color: #fff;
+  color: white;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: none;
+  font-size: 1em;
 }
 
-.full-screen {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.contact-form-submit:hover {
+  background-color: #444;
 }
 
-
-
-
+@media screen and (max-width: 768px) {
+  .contact-form-row {
+    flex-direction: column;
+  }
+}
