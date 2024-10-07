@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [isMounted, setIsMounted] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
@@ -14,14 +15,21 @@ const Navbar = () => {
     return null;
   }
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <div className="navbar">
       <Link to="/About" className="navbar-logo">
         <img src="https://utfs.io/f/FW3ifDeLBap6o1XXfFlVhBLlipgCSf7e0PIO28ERwkXnFxjQ" alt="Jellyfish Logo" className="navbar-icon" />
       </Link>
-      <nav>
-        <Link to="/about">About</Link>
-        <Link to="/contact">Contact</Link>
+      <button className="menu-toggle" onClick={toggleMenu}>
+        ☰
+      </button>
+      <nav className={isMenuOpen ? 'open' : ''}>
+        <Link to="/about" onClick={toggleMenu}>About</Link>
+        <Link to="/contact" onClick={toggleMenu}>Contact</Link>
       </nav>
     </div>
   );
