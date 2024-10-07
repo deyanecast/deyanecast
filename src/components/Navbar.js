@@ -16,11 +16,10 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
-      <Link to="/">
-          <h1>Portfolio</h1>
+      <Link to="/About" className="navbar-logo">
+        <img src="https://utfs.io/f/FW3ifDeLBap6o1XXfFlVhBLlipgCSf7e0PIO28ERwkXnFxjQ" alt="Jellyfish Logo" className="navbar-icon" />
       </Link>
       <nav>
-        <Link to="/">Home</Link>
         <Link to="/about">About</Link>
         <Link to="/contact">Contact</Link>
       </nav>

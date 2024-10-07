@@ -8,7 +8,7 @@ const Career = () => {
       <div id="career" className="career-container">
         <div className="career-text-container">
           <h1>My Career so far</h1>
-          <p>Este es un párrafo de texto. Aquí puedes escribir sobre tu carrera.</p>
+          <p>I'm a software developer with a passion for creating innovative solutions to complex problems. I have a strong foundation in software development and a knack for learning new technologies.</p>
         </div>
         <div className="career-list-container">
           <ul className="list-container">

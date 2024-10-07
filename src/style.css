@@ -14,9 +14,28 @@ body {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 10px;
-  background-color: #333;
+  background-color: #6C6C6C;
   z-index: 1000; 
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.navbar-icon {
+  width: 40px;  /* Ajusta este valor según el tamaño que desees */
+  height: 40px; /* Ajusta este valor según el tamaño que desees */
+  margin-right: 10px;
+}
+
+.navbar h1 {
+  color: white;
+  margin: 0;
+  font-size: 1.5em;
 }
 
 .navbar nav {
@@ -24,7 +43,10 @@ body {
   justify-content: space-around;
   width: 45%;
   flex-wrap: wrap;
-  align-content: center;
+  align-items: center;
+  gap: 24px;
+  justify-content: flex-end;
+  padding-right: 24px;
 }
 
 .navbar a {
@@ -60,7 +82,7 @@ body {
   right: 0; /* Asegura que el footer tenga un ancho del 100% */
   bottom: 0;
   width: 100%;
-  background-color: #333;
+  background-color:  #6C6C6C;
   color: white;
   text-align: center;
   padding: 10px;
@@ -139,6 +161,9 @@ body {
 .career-text-container {
   flex: 1;
   margin-right: 20px;
+}
+.career-text-container p {
+  line-height: 24px;
 }
 
 .career-list-container {
@@ -233,7 +258,8 @@ body {
 .about-text, .about-photo {
   flex: 1;
   margin-right: 20px;
-  color:#666666;
+  color: #333;
+  line-height: 24px;
 }
 
 .about-photo img {
