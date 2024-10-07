@@ -1,8 +1,7 @@
 import React from 'react';
 import '../style.css';
 import myPhoto from '../portafolio.jpeg';
-import Career from './Career'; // Asegúrate de que la ruta sea correcta
-
+import Career from './Career'; 
 const About = () => {
   return (
     <div>

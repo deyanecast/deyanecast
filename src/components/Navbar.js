@@ -11,6 +11,10 @@ const Navbar = () => {
     return () => setIsMounted(false);
   }, []);
 
+  useEffect(() => {
+    document.body.style.paddingTop = isMenuOpen ? '200px' : '60px';
+  }, [isMenuOpen]);
+
   if (!isMounted) {
     return null;
   }
@@ -20,7 +24,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar">
+    <div className={`navbar ${isMenuOpen ? 'menu-open' : ''}`}>
       <Link to="/About" className="navbar-logo">
         <img src="https://utfs.io/f/FW3ifDeLBap6o1XXfFlVhBLlipgCSf7e0PIO28ERwkXnFxjQ" alt="Jellyfish Logo" className="navbar-icon" />
       </Link>

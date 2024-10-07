@@ -63,36 +63,6 @@ body {
   cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
-  .navbar {
-    flex-wrap: wrap;
-    flex-direction: row;
-    display: flex;
-    justify-content: center;
-    gap: 60%;
-  }
-
-  .menu-toggle {
-    display: block;
-  }
-
-  .navbar nav {
-    flex-basis: 100%;
-    flex-direction: column;
-    align-items: flex-start;
-    display: none;
-    padding: 10px 0;
-  }
-
-  .navbar nav.open {
-    display: flex;
-  }
-
-  .navbar nav a {
-    padding: 10px 0;
-  }
-}
-
 .home-container {
   display: flex;
   justify-content: center;
@@ -118,9 +88,8 @@ body {
 .footer {
   position: static;
   left: 0;
-  right: 0; /* Asegura que el footer tenga un ancho del 100% */
+  right: 0; 
   bottom: 0;
-  width: 100%;
   background-color:  #6C6C6C;
   color: white;
   text-align: center;
@@ -138,20 +107,6 @@ body {
   margin: 0 0.5em; /* Ajusta los márgenes para asegurar que los iconos no salgan de la ventana gráfica */
   color: #fff; /* o cualquier color que quieras usar */
 
-}
-
-@media screen and (max-width: 768px) {
-  .home-title {
-    font-size: 1.5em;
-  }
-
-  .home-text {
-    font-size: 0.75em;
-  }
-
-  .navbar nav {
-    width: 100%;
-  }
 }
 
 .projects-container {
@@ -177,20 +132,12 @@ body {
   border: none;
 }
 
-@media screen and (max-width: 768px) {
-  .project-frame {
-    width: 95%;
-    margin-bottom: 20px;
-  }
-}
-
 .career-container {
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
   padding: 20px;
   padding-top: 100px; 
-  max-width: 1200px;
 }
 
 .career-text-container {
@@ -206,21 +153,6 @@ body {
   display: flex;
   flex-direction: row;
   gap: 20px;
-}
-
-@media screen and (max-width: 768px) {
-  .career-container {
-    flex-direction: column;
-  }
-
-  .career-text-container, .career-list-container {
-    margin-right: 0;
-    margin-bottom: 20px;
-  }
-
-  .career-list-container {
-    flex-direction: column;
-  }
 }
 
 .list-container {
@@ -246,7 +178,6 @@ body {
   margin: 0 auto;
   padding: 20px;
   padding-top: 100px;
-  max-width: 1200px;
   min-height: 80vh; 
 }
 
@@ -266,27 +197,11 @@ body {
   background-color: #ffffff;
 }
 
-@media screen and (max-width: 768px) {
-  .experience {
-    flex-direction: column;
-  }
-
-  .experience-item {
-    flex-direction: column;
-  }
-
-  .job-info {
-    margin-bottom: 20px;
-  }
-}
-
 .about {
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
   padding: 20px;
-  padding-top: 100px;
-  max-width: 1200px;
   min-height: 80vh;
 }
 
@@ -303,22 +218,11 @@ body {
   object-fit: cover;
 }
 
-@media screen and (max-width: 768px) {
-  .about {
-    flex-direction: column;
-  }
-
-  .about-text, .about-photo {
-    margin-right: 0;
-  }
-}
-
 .contact-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 1rem;
-  max-width: 800px;
   margin: auto;
   gap: 0.5rem;
   justify-content: center;
@@ -385,5 +289,77 @@ body {
 @media screen and (max-width: 768px) {
   .contact-form-row {
     flex-direction: column;
+  }
+  .about {
+    flex-direction: column;
+  }
+
+  .about-text, .about-photo {
+    margin-right: 0;
+  }
+  .experience {
+    flex-direction: column;
+  }
+
+  .experience-item {
+    flex-direction: column;
+  }
+
+  .job-info {
+    margin-bottom: 20px;
+  }
+  .career-container {
+    flex-direction: column;
+  }
+
+  .career-text-container, .career-list-container {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .career-list-container {
+    flex-direction: column;
+  }
+  .project-frame {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .home-title {
+    font-size: 1.5em;
+  }
+
+  .home-text {
+    font-size: 0.75em;
+  }
+
+  .navbar nav {
+    width: 100%;
+  }
+  .navbar {
+    flex-wrap: wrap;
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+    gap: 60%;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .navbar nav {
+    flex-basis: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    display: none;
+    padding: 10px 0;
+  }
+
+  .navbar nav.open {
+    display: flex;
+  }
+
+  .navbar nav a {
+    padding: 10px 0;
   }
 }
