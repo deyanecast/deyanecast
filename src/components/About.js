@@ -1,23 +1,68 @@
 import React from 'react';
-import '../style.css';
-import myPhoto from '../portafolio.jpeg';
-import Career from './Career'; 
+import { FormattedMessage } from 'react-intl';
+
 const About = () => {
+  const scrollToTech = () => {
+    document.querySelector('.tech-section').scrollIntoView({ 
+      behavior: 'smooth' 
+    });
+  };
+
   return (
-    <div>
-      <div id="about" className="about">
+    <div className="about-container">
+      <div className="about-content">
         <div className="about-text">
-          <h3>HEY THERE!</h3>
-          <h2 className="about-text-title">I'm Deyane</h2>
-          <p className="about-text-text">I am Deyane, a young mother from Guatemala with a great interest in life, science and technology. I am passionate about learning about new developments in these fields and am committed to using my knowledge and skills to make a positive difference in my community and the world. My goal is to build something that can help future generations to prosper and have a better future.</p> 
+          <h1 className="about-title">
+            <FormattedMessage id="about.title" />
+          </h1>
+          <h2 className="about-subtitle">
+            <FormattedMessage id="about.subtitle" />
+          </h2>
+          <p className="about-description">
+            <FormattedMessage id="about.description" />
+          </p>
         </div>
-        <div className="about-photo">
-          <img src={myPhoto} alt="Yo" />
+        <div className="scroll-indicator" onClick={scrollToTech}>
+          ↓
         </div>
       </div>
-      <Career /> 
+      
+      <div className="tech-section">
+        <h3 className="tech-title">
+          <FormattedMessage id="about.techTitle" />
+        </h3>
+        <div className="tech-grid">
+          <div className="tech-category">
+            <h4>Frontend</h4>
+            <div className="tech-items">
+              <span>React</span>
+              <span>JavaScript</span>
+              <span>TypeScript</span>
+              <span>HTML5</span>
+              <span>CSS3</span>
+            </div>
+          </div>
+          <div className="tech-category">
+            <h4>Backend</h4>
+            <div className="tech-items">
+              <span>Node.js</span>
+              <span>Express</span>
+              <span>Python</span>
+              <span>Java</span>
+            </div>
+          </div>
+          <div className="tech-category">
+            <h4>Database</h4>
+            <div className="tech-items">
+              <span>MongoDB</span>
+              <span>PostgreSQL</span>
+              <span>MySQL</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default About;

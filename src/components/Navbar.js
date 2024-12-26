@@ -1,42 +1,64 @@
-import React, { useState, useEffect } from 'react';
-import '../style.css';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
+import { LanguageContext } from '../context/LanguageContext';
+import '../style.css';
 
 const Navbar = () => {
-  const [isMounted, setIsMounted] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const { locale, switchLanguage } = useContext(LanguageContext);
 
   useEffect(() => {
-    setIsMounted(true);
-    return () => setIsMounted(false);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  useEffect(() => {
-    document.body.style.paddingTop = isMenuOpen ? '200px' : '60px';
-  }, [isMenuOpen]);
-
-  if (!isMounted) {
-    return null;
-  }
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+    document.body.style.overflow = !isMenuOpen ? 'hidden' : 'auto';
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+    document.body.style.overflow = 'auto';
   };
 
   return (
-    <div className={`navbar ${isMenuOpen ? 'menu-open' : ''}`}>
-      <Link to="/About" className="navbar-logo">
-        <img src="https://utfs.io/f/FW3ifDeLBap6o1XXfFlVhBLlipgCSf7e0PIO28ERwkXnFxjQ" alt="Jellyfish Logo" className="navbar-icon" />
+    <div className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+      <Link to="/about" className="navbar-logo" onClick={closeMenu}>
+        <img 
+          src="https://utfs.io/f/FW3ifDeLBap6o1XXfFlVhBLlipgCSf7e0PIO28ERwkXnFxjQ" 
+          alt="Jellyfish Logo" 
+          className="navbar-icon" 
+        />
       </Link>
-      <button className="menu-toggle" onClick={toggleMenu}>
-        ☰
-      </button>
+      
       <nav className={isMenuOpen ? 'open' : ''}>
-        <Link to="/about" onClick={toggleMenu}>About</Link>
-        <Link to="/contact" onClick={toggleMenu}>Contact</Link>
+        <Link to="/about" onClick={closeMenu}>
+          <FormattedMessage id="nav.about" />
+        </Link>
+        <Link to="/contact" onClick={closeMenu}>
+          <FormattedMessage id="nav.contact" />
+        </Link>
+        <Link to="/projects" onClick={closeMenu}>
+          <FormattedMessage id="nav.projects" />
+        </Link>
       </nav>
+
+      <button 
+        className="menu-toggle" 
+        onClick={toggleMenu}
+        aria-label="Toggle menu"
+      >
+        {isMenuOpen ? '✕' : '☰'}
+      </button>
     </div>
   );
-}
+};
 
 export default Navbar;

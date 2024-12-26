@@ -1,65 +1,70 @@
-import React, { useRef } from "react";
-import emailjs from "@emailjs/browser";
-import Footer from "./Footer";
-import "../style.css";
+import React, { useRef, useContext } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
+import emailjs from '@emailjs/browser';
 
-export const Contact = () => {
+const Contact = () => {
   const form = useRef();
+  const intl = useIntl();
 
   const sendEmail = (e) => {
     e.preventDefault();
 
-    emailjs
-      .sendForm(
-        "service_oavekzn",
-        "template_zw6n3q7",
-        form.current,
-        "ZBWKdGjMxrXSwkUA9"
-      )
-      .then(
-        (result) => {
+    emailjs.sendForm('service_2qkwzxg', 'template_8zk5w3q', form.current, 'user_your_user_id')
+      .then((result) => {
           console.log(result.text);
-          window.alert("Mensaje enviado con éxito!");
           form.current.reset();
-        },
-        (error) => {
+          alert(intl.formatMessage({ id: 'contact.success' }));
+      }, (error) => {
           console.log(error.text);
-          window.alert(
-            "Hubo un error al enviar el mensaje. Por favor, intente nuevamente."
-          );
-        }
-      );
+          alert(intl.formatMessage({ id: 'contact.error' }));
+      });
   };
 
   return (
-    <>
-      <div className="contact-container full-screen">
-        <h1 className="contact-title">Contact</h1>
-        <h2 className="contact-subtitle">We'd love to hear from you!</h2>
-        <form ref={form} onSubmit={sendEmail} className="contact-form">
-          <div className="contact-form-row">
-            <div className="contact-form-field">
-              <label className="contact-form-label">Name</label>
-              <input type="text" name="name" className="contact-form-input" />
-            </div>
-            <div className="contact-form-field">
-              <label className="contact-form-label">Email</label>
-              <input
-                type="email"
-                name="user_email"
-                className="contact-form-input"
-              />
-            </div>
-          </div>
-          <div className="contact-form-field">
-            <label className="contact-form-label">Message</label>
-            <textarea name="message" className="contact-form-textarea" />
-          </div>
-          <input type="submit" value="Send" className="contact-form-submit" />
-        </form>
+    <div className="contact-container">
+      <h2 className="contact-title">
+        <FormattedMessage id="contact.title" />
+      </h2>
+      <p className="contact-subtitle">
+        <FormattedMessage id="contact.subtitle" />
+      </p>
+      
+      <form ref={form} onSubmit={sendEmail} className="contact-form">
+        <div className="contact-form-row">
+          <input
+            type="text"
+            name="user_name"
+            placeholder={intl.formatMessage({ id: 'contact.name' })}
+            required
+            className="contact-form-field"
+          />
+          <input
+            type="email"
+            name="user_email"
+            placeholder={intl.formatMessage({ id: 'contact.email' })}
+            required
+            className="contact-form-field"
+          />
+        </div>
+        <textarea
+          name="message"
+          placeholder={intl.formatMessage({ id: 'contact.message' })}
+          required
+          className="contact-form-textarea"
+        />
+        <button type="submit" className="contact-form-submit">
+          <FormattedMessage id="contact.submit" />
+        </button>
+      </form>
+      
+      <div className="contact-alternative">
+        <p><FormattedMessage id="contact.findMe" /></p>
+        <div className="social-links">
+          <a href="https://github.com/deyanecast" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/in/deyanecast" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
       </div>
-      <Footer />
-    </>
+    </div>
   );
 };
 
