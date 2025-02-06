@@ -1,10 +1,11 @@
 import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { LanguageProvider, LanguageContext } from './context/LanguageContext';
+import Home from './components/Home';
 import About from './components/About';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
-import Navbar from './components/Navbar';
+import FloatingNavbar from './components/FloatingNavbar';
 import { Analytics } from '@vercel/analytics/react';
 import './style.css';
 
@@ -21,15 +22,15 @@ const App = () => {
   return (
     <LanguageProvider>
       <div className="App">
-        <Navbar />
         <div className="content">
           <Routes>
-            <Route path="/" element={<Navigate to="/about" replace />} />
+            <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </div>
+        <FloatingNavbar />
         <LanguageButton />
         <Analytics debug={true} />
       </div>

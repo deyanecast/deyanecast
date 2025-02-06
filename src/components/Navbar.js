@@ -30,7 +30,7 @@ const Navbar = () => {
 
   return (
     <div className={`navbar ${scrolled ? 'scrolled' : ''}`}>
-      <Link to="/about" className="navbar-logo" onClick={closeMenu}>
+      <Link to="/" className="navbar-logo" onClick={closeMenu}>
         <img 
           src="https://utfs.io/f/FW3ifDeLBap6o1XXfFlVhBLlipgCSf7e0PIO28ERwkXnFxjQ" 
           alt="Jellyfish Logo" 
