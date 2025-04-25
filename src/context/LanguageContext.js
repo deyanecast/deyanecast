@@ -1,21 +1,21 @@
 import React, { createContext, useState } from 'react';
 import { IntlProvider } from 'react-intl';
-import { ENGLISH } from '../translations/en';
-import { SPANISH } from '../translations/es';
+import englishMessages from '../translations/en.json';
+import spanishMessages from '../translations/es.json';
 
 export const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
   const [locale, setLocale] = useState('en');
-  const [messages, setMessages] = useState(ENGLISH);
+  const [messages, setMessages] = useState(englishMessages);
 
   const switchLanguage = () => {
     if (locale === 'es') {
       setLocale('en');
-      setMessages(ENGLISH);
+      setMessages(englishMessages);
     } else {
       setLocale('es');
-      setMessages(SPANISH);
+      setMessages(spanishMessages);
     }
   };
 

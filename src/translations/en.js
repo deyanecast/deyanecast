@@ -12,9 +12,7 @@ export const ENGLISH = {
   
   // Projects Page
   'projects.title': 'Projects',
-  'projects.comingSoon': 'Coming Soon',
-  'projects.description': 'Amazing projects are being crafted...',
-  'projects.tech': 'Technologies I use:',
+  'projects.myStoriesInPictures': 'My Stories in Pictures',
   
   // Contact Page
   'contact.title': 'Let\'s talk!',

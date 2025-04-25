@@ -1,72 +1,86 @@
 .projects-container {
   padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
+}
+
+.gallery-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
 
 .coming-soon-card {
-  position: relative;
-  padding: 3rem;
-  text-align: center;
   background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border-radius: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  width: 100%;
-  max-width: 600px;
+  border-radius: 15px;
+  padding: 2rem;
   margin: 2rem auto;
+  max-width: 600px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.coming-soon-card:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .pulse-animation {
   position: absolute;
-  width: 100px;
-  height: 100px;
-  background: #6366f1;
-  border-radius: 50%;
-  opacity: 0.2;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
   animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
   0% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 0.2;
+    transform: scale(0.95);
+    opacity: 0.7;
   }
-  50% {
-    transform: translate(-50%, -50%) scale(1.5);
-    opacity: 0.1;
+  70% {
+    transform: scale(1);
+    opacity: 0.3;
   }
   100% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 0.2;
+    transform: scale(0.95);
+    opacity: 0.7;
   }
 }
 
 .tech-stack {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  margin-top: 2rem;
-  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
 }
 
 .tech-stack span {
-  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
+  color: var(--text-color);
+  margin: 0.5rem;
+  display: inline-block;
+}
+
+.tech-stack p {
+  margin-top: 1rem;
+  color: var(--accent-color);
+  font-size: 1rem;
+}
+
+.back-button {
+  margin-top: 2rem;
+  padding: 0.8rem 1.5rem;
   background: rgba(255, 255, 255, 0.1);
-  border-radius: 2rem;
-  font-size: 0.9rem;
+  border: none;
+  border-radius: 8px;
+  color: var(--text-color);
+  font-size: 1rem;
+  cursor: pointer;
   transition: all 0.3s ease;
 }
 
-.tech-stack span:hover {
+.back-button:hover {
   background: rgba(255, 255, 255, 0.2);
   transform: translateY(-2px);
 }
@@ -78,16 +92,15 @@
   }
   
   .coming-soon-card {
-    padding: 2rem;
+    padding: 1.5rem;
     margin: 1rem;
   }
   
-  .tech-stack {
-    gap: 0.5rem;
+  .tech-stack span {
+    font-size: 1.2rem;
   }
   
-  .tech-stack span {
-    font-size: 0.8rem;
-    padding: 0.4rem 0.8rem;
+  .tech-stack p {
+    font-size: 0.9rem;
   }
 } 
