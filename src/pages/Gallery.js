@@ -1,34 +1,19 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import { motion } from 'framer-motion';
+import { useIntl } from 'react-intl';
 import PhotoGallery from '../components/PhotoGallery';
-import { Link } from 'react-router-dom';
-import './Gallery.css';
 
 const Gallery = () => {
+  const intl = useIntl();
+
   return (
-    <motion.div
-      className="gallery-page-container"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
+    <div className="gallery-page">
       <div className="gallery-header">
-        <Link to="/projects" className="back-link">
-          <motion.span
-            whileHover={{ x: -5 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            ← <FormattedMessage id="gallery.backToProjects" />
-          </motion.span>
-        </Link>
-        <h1 className="gallery-title">
-          <FormattedMessage id="gallery.title" />
-        </h1>
+        <span className="gallery-section">GALERÍA</span>
+        <h1 className="gallery-title">{intl.formatMessage({ id: 'gallery.title' })}</h1>
+        <p className="gallery-subtitle">{intl.formatMessage({ id: 'gallery.subtitle' })}</p>
       </div>
-      
       <PhotoGallery />
-    </motion.div>
+    </div>
   );
 };
 

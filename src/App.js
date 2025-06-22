@@ -7,36 +7,54 @@ import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Gallery from './pages/Gallery';
 import FloatingNavbar from './components/FloatingNavbar';
-import { Analytics } from '@vercel/analytics/react';
 import './style.css';
+import { ThemeProvider } from './context/ThemeContext';
+import ThemeToggle from './components/ThemeToggle';
 
 const LanguageButton = () => {
   const { locale, switchLanguage } = React.useContext(LanguageContext);
+  
+  const handleClick = () => {
+    console.log('Language button clicked! Current locale:', locale);
+    switchLanguage();
+  };
+
   return (
-    <button onClick={switchLanguage} className="language-toggle">
+    <button 
+      onClick={handleClick} 
+      className="language-toggle"
+    >
       {locale === 'es' ? 'EN' : 'ES'}
     </button>
   );
 };
 
+const AppContent = () => {
+  return (
+    <div className="App">
+      <div className="content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </div>
+      <FloatingNavbar />
+      <ThemeToggle />
+      <LanguageButton />
+    </div>
+  );
+};
+
 const App = () => {
   return (
-    <LanguageProvider>
-      <div className="App">
-        <div className="content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/gallery" element={<Gallery />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
-        </div>
-        <FloatingNavbar />
-        <LanguageButton />
-        <Analytics debug={true} />
-      </div>
-    </LanguageProvider>
+    <ThemeProvider>
+      <LanguageProvider>
+        <AppContent />
+      </LanguageProvider>
+    </ThemeProvider>
   );
 };
 

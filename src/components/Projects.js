@@ -1,31 +1,30 @@
-// Projects.js
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import { motion } from 'framer-motion';
+import { useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
 import './Projects.css';
 
 const Projects = () => {
+  const intl = useIntl();
+
   return (
     <div className="projects-container">
-      <h2 className="gradient-text">
-        <FormattedMessage id="projects.title" />
-      </h2>
-      
-      <Link to="/gallery" className="gallery-link">
-        <motion.div
-          className="coming-soon-card"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <div className="pulse-animation"></div>
-          <div className="tech-stack">
-            <span>MY STORIES IN PICTURES</span>
-          </div>
-        </motion.div>
-      </Link>
+      <h1 className="projects-title">My Projects</h1>
+      <div className="projects-grid">
+        <div className="project-card">
+          <h2>{intl.formatMessage({ id: 'projects.project1.title' })}</h2>
+          <p>{intl.formatMessage({ id: 'projects.project1.description' })}</p>
+        </div>
+        <div className="project-card">
+          <h2>{intl.formatMessage({ id: 'projects.project2.title' })}</h2>
+          <p>{intl.formatMessage({ id: 'projects.project2.description' })}</p>
+        </div>
+        <div className="project-card gallery-link">
+            <h2>{intl.formatMessage({ id: 'projects.gallery.title' })}</h2>
+            <p>{intl.formatMessage({ id: 'projects.gallery.description' })}</p>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default Projects;
+export default Projects; 
