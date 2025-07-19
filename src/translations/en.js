@@ -1,4 +1,7 @@
 export const ENGLISH = {
+  // Home Page
+  'home.welcome': 'Welcome',
+  
   // Navigation
   'nav.about': 'About',
   'nav.contact': 'Contact',

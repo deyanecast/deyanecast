@@ -1,4 +1,5 @@
 export const SPANISH = {
+  'home.welcome': 'Bienvenido',
   'nav.about': 'Sobre mí',
   'nav.contact': 'Contacto',
   'nav.projects': 'Proyectos',
