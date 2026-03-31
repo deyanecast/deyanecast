@@ -165,6 +165,10 @@
   display: none;
 }
 
+.snake-fullscreen-btn {
+  display: none;
+}
+
 /* Efectos pixelados */
 .snake-game-container::before {
   content: '';
@@ -184,6 +188,8 @@
 /* Responsive breakpoints */
 @media (max-width: 768px) {
   .snake-game-container {
+    --sg-mobile-controls-space: 10.5rem;
+    --sg-mobile-top-space: calc(env(safe-area-inset-top) + 8.2rem);
     justify-content: flex-start;
     gap: 0.8rem;
     padding: calc(env(safe-area-inset-top) + 4.2rem) 0.8rem calc(7.6rem + env(safe-area-inset-bottom));
@@ -199,8 +205,8 @@
   }
   
   .snake-game-canvas {
-    width: min(96vw, 68vh, 420px);
-    height: min(96vw, 68vh, 420px);
+    width: min(96vw, calc(100dvh - var(--sg-mobile-top-space) - var(--sg-mobile-controls-space)), 420px);
+    height: min(96vw, calc(100dvh - var(--sg-mobile-top-space) - var(--sg-mobile-controls-space)), 420px);
   }
 
   .snake-game-touch-controls {
@@ -249,10 +255,31 @@
   .snake-game-controls {
     display: none;
   }
+
+  .snake-fullscreen-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-end;
+    margin-top: -0.25rem;
+    padding: 0.5rem 0.85rem;
+    min-height: 40px;
+    border-radius: 999px;
+    border: 1px solid color-mix(in oklab, var(--sg-accent) 40%, transparent);
+    background: color-mix(in oklab, var(--sg-panel-bg) 84%, var(--sg-accent) 16%);
+    color: var(--sg-accent);
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    box-shadow: 0 0 10px color-mix(in oklab, var(--sg-shadow) 65%, transparent);
+  }
 }
 
 @media (max-width: 480px) {
   .snake-game-container {
+    --sg-mobile-controls-space: 11rem;
+    --sg-mobile-top-space: calc(env(safe-area-inset-top) + 8.7rem);
     padding: calc(env(safe-area-inset-top) + 4.5rem) 0.45rem calc(7.8rem + env(safe-area-inset-bottom));
   }
   
@@ -261,8 +288,8 @@
   }
   
   .snake-game-canvas {
-    width: min(96vw, 62vh, 390px);
-    height: min(96vw, 62vh, 390px);
+    width: min(96vw, calc(100dvh - var(--sg-mobile-top-space) - var(--sg-mobile-controls-space)), 390px);
+    height: min(96vw, calc(100dvh - var(--sg-mobile-top-space) - var(--sg-mobile-controls-space)), 390px);
   }
 
   .snake-game-overlay,
@@ -293,5 +320,11 @@
     font-size: 1.22rem;
     min-height: 64px;
     min-width: 64px;
+  }
+
+  .snake-fullscreen-btn {
+    padding: 0.45rem 0.8rem;
+    min-height: 38px;
+    font-size: 0.72rem;
   }
 } 

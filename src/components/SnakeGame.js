@@ -4,13 +4,19 @@ import { useTheme } from '../context/ThemeContext';
 
 const SnakeGame = () => {
   const { theme } = useTheme();
-  const isTouchDevice = useMemo(() => globalThis.matchMedia('(pointer: coarse)').matches, []);
+  const isTouchDevice = useMemo(
+    () => typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches,
+    []
+  );
+  const gameContainerRef = useRef(null);
   const [snake, setSnake] = useState([[10, 10]]);
   const [food, setFood] = useState([15, 15]);
   const [direction, setDirection] = useState([0, 1]);
   const [gameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(0);
   const [gameStarted, setGameStarted] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [fullscreenEnabled, setFullscreenEnabled] = useState(true);
   const gameLoopRef = useRef();
   const canvasRef = useRef(null);
 
@@ -222,6 +228,30 @@ const SnakeGame = () => {
     return () => window.removeEventListener('resize', resizeCanvas);
   }, [resizeCanvas]);
 
+  useEffect(() => {
+    const onFullscreenChange = () => {
+      setIsFullscreen(Boolean(document.fullscreenElement));
+    };
+
+    setFullscreenEnabled(Boolean(document.fullscreenEnabled));
+    document.addEventListener('fullscreenchange', onFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', onFullscreenChange);
+  }, []);
+
+  const toggleFullscreen = async () => {
+    if (!fullscreenEnabled || !gameContainerRef.current) return;
+
+    try {
+      if (!document.fullscreenElement) {
+        await gameContainerRef.current.requestFullscreen();
+      } else {
+        await document.exitFullscreen();
+      }
+    } catch (err) {
+      setFullscreenEnabled(false);
+    }
+  };
+
   // Reiniciar juego
   const restartGame = () => {
     setSnake([[10, 10]]);
@@ -233,7 +263,17 @@ const SnakeGame = () => {
   };
 
   return (
-    <div className="snake-game-container">
+    <div className="snake-game-container" ref={gameContainerRef}>
+      {isTouchDevice && fullscreenEnabled && (
+        <button
+          type="button"
+          className="snake-fullscreen-btn"
+          onClick={toggleFullscreen}
+          aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
+        >
+          {isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
+        </button>
+      )}
       <div className="snake-game-header">
         <h1 className="snake-game-title">Snake Game</h1>
         <div className="snake-game-info">
