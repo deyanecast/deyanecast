@@ -272,7 +272,7 @@ const SnakeGame = () => {
       </div>
       
       <div className="snake-game-controls">
-        <p>Use arrow keys to control the snake</p>
+        <p>Use arrow keys or touch controls to move the snake</p>
         <p>Eat the red food to grow and score points</p>
       </div>
     </div>

@@ -183,7 +183,7 @@
 /* Responsive breakpoints */
 @media (max-width: 768px) {
   .snake-game-container {
-    padding: 0.75rem 0.8rem calc(6rem + env(safe-area-inset-bottom));
+    padding: calc(env(safe-area-inset-top) + 4.2rem) 0.8rem calc(7.8rem + env(safe-area-inset-bottom));
   }
   
   .snake-game-header {
@@ -202,28 +202,33 @@
 
   .snake-game-touch-controls {
     display: grid;
-    grid-template-columns: repeat(3, minmax(44px, 62px));
-    grid-template-rows: repeat(2, minmax(44px, 62px));
-    gap: 0.5rem;
+    grid-template-columns: repeat(3, minmax(62px, 84px));
+    grid-template-rows: repeat(2, minmax(62px, 84px));
+    gap: 0.7rem;
     justify-content: center;
     align-items: center;
     width: 100%;
-    max-width: 260px;
-    margin-top: 0.25rem;
+    max-width: 340px;
+    margin-top: 0.35rem;
+    margin-bottom: 0.15rem;
   }
 
   .touch-btn {
     appearance: none;
     border: 1px solid color-mix(in oklab, var(--sg-accent) 58%, transparent);
-    border-radius: 12px;
+    border-radius: 14px;
     background: color-mix(in oklab, var(--sg-panel-bg) 85%, var(--sg-accent) 15%);
     color: var(--sg-accent);
-    font-size: 1rem;
+    font-size: 1.28rem;
     font-weight: 700;
     display: grid;
     place-items: center;
+    min-height: 62px;
+    min-width: 62px;
     line-height: 1;
     box-shadow: 0 0 10px color-mix(in oklab, var(--sg-shadow) 65%, transparent);
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .touch-btn:active {
@@ -239,7 +244,7 @@
 
 @media (max-width: 480px) {
   .snake-game-container {
-    padding: 0.55rem 0.45rem calc(6.2rem + env(safe-area-inset-bottom));
+    padding: calc(env(safe-area-inset-top) + 4.5rem) 0.45rem calc(8.2rem + env(safe-area-inset-bottom));
   }
   
   .snake-game-title {
@@ -257,5 +262,17 @@
   
   .snake-game-controls p {
     font-size: 0.8rem;
+  }
+
+  .snake-game-touch-controls {
+    grid-template-columns: repeat(3, minmax(64px, 76px));
+    grid-template-rows: repeat(2, minmax(64px, 76px));
+    gap: 0.65rem;
+  }
+
+  .touch-btn {
+    font-size: 1.22rem;
+    min-height: 64px;
+    min-width: 64px;
   }
 } 
