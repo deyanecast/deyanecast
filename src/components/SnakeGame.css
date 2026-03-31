@@ -91,8 +91,9 @@
   border-radius: 5px;
   max-width: 100%;
   max-height: 100%;
-  width: min(68vw, 58dvh, 400px);
-  height: min(68vw, 58dvh, 400px);
+  width: min(68vw, 58vh, 400px);
+  height: min(68vw, 58vh, 400px);
+  aspect-ratio: 1 / 1;
   object-fit: contain;
 }
 
@@ -109,7 +110,7 @@
   align-items: center;
   justify-content: center;
   color: var(--sg-accent);
-  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  font-size: clamp(1rem, 2.8vw, 1.4rem);
   text-align: center;
   border-radius: 5px;
   padding: 1rem;
@@ -196,8 +197,8 @@
   }
   
   .snake-game-canvas {
-    width: min(88vw, 52dvh, 350px);
-    height: min(88vw, 52dvh, 350px);
+    width: min(88vw, 52vh, 350px);
+    height: min(88vw, 52vh, 350px);
   }
 
   .snake-game-touch-controls {
@@ -252,8 +253,18 @@
   }
   
   .snake-game-canvas {
-    width: min(92vw, 46dvh, 300px);
-    height: min(92vw, 46dvh, 300px);
+    width: min(94vw, 52vh, 330px);
+    height: min(94vw, 52vh, 330px);
+  }
+
+  .snake-game-overlay,
+  .snake-game-start-overlay {
+    font-size: 1rem;
+    padding: 0.7rem;
+  }
+
+  .snake-game-overlay p {
+    margin: 0.32rem 0;
   }
   
   .snake-game-controls {
