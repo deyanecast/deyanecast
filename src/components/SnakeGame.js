@@ -16,6 +16,10 @@ const SnakeGame = () => {
   const [gameStarted, setGameStarted] = useState(false);
   const gameLoopRef = useRef();
   const canvasRef = useRef(null);
+  const directionRef = useRef([0, 1]);
+  const foodRef = useRef([15, 15]);
+  const gameOverRef = useRef(false);
+  const gameStartedRef = useRef(false);
 
   const GRID_SIZE = 20;
   const GAME_SPEED = 150;
@@ -41,50 +45,44 @@ const SnakeGame = () => {
 
   // Generar comida aleatoria
   const generateFood = useCallback(() => {
-    const newFood = [
-      Math.floor(Math.random() * GRID_SIZE),
-      Math.floor(Math.random() * GRID_SIZE)
-    ];
-    setFood(newFood);
+    setFood(() => {
+      const newFood = [
+        Math.floor(Math.random() * GRID_SIZE),
+        Math.floor(Math.random() * GRID_SIZE)
+      ];
+      foodRef.current = newFood;
+      return newFood;
+    });
   }, []);
-
-  // Verificar colisión
-  const checkCollision = useCallback((head) => {
-    // Colisión con paredes
-    if (head[0] < 0 || head[0] >= GRID_SIZE || head[1] < 0 || head[1] >= GRID_SIZE) {
-      return true;
-    }
-    // Colisión con el cuerpo
-    for (let i = 1; i < snake.length; i++) {
-      if (head[0] === snake[i][0] && head[1] === snake[i][1]) {
-        return true;
-      }
-    }
-    return false;
-  }, [snake]);
 
   // Mover la serpiente
   const moveSnake = useCallback(() => {
-    if (gameOver) return;
+    if (gameOverRef.current || !gameStartedRef.current) return;
 
     setSnake(prevSnake => {
-      const newSnake = [...prevSnake];
-      const head = [...newSnake[0]];
+      const currentDirection = directionRef.current;
+      const currentFood = foodRef.current;
+      const head = [prevSnake[0][0], prevSnake[0][1]];
       
       // Mover la cabeza
-      head[0] += direction[0];
-      head[1] += direction[1];
+      head[0] += currentDirection[0];
+      head[1] += currentDirection[1];
 
       // Verificar colisión
-      if (checkCollision(head)) {
+      const hitWall = head[0] < 0 || head[0] >= GRID_SIZE || head[1] < 0 || head[1] >= GRID_SIZE;
+      const hitSelf = prevSnake.slice(1).some(
+        (segment) => head[0] === segment[0] && head[1] === segment[1]
+      );
+      if (hitWall || hitSelf) {
+        gameOverRef.current = true;
         setGameOver(true);
         return prevSnake;
       }
 
-      newSnake.unshift(head);
+      const newSnake = [head, ...prevSnake];
 
       // Verificar si come la comida
-      if (head[0] === food[0] && head[1] === food[1]) {
+      if (head[0] === currentFood[0] && head[1] === currentFood[1]) {
         setScore(prev => prev + 10);
         generateFood();
       } else {
@@ -93,17 +91,22 @@ const SnakeGame = () => {
 
       return newSnake;
     });
-  }, [direction, food, gameOver, checkCollision, generateFood]);
+  }, [generateFood]);
 
   const changeDirection = useCallback((nextDirection) => {
-    setDirection((prevDirection) => {
-      const isReverse =
-        prevDirection[0] + nextDirection[0] === 0 &&
-        prevDirection[1] + nextDirection[1] === 0;
-      return isReverse ? prevDirection : nextDirection;
-    });
-    if (!gameStarted) setGameStarted(true);
-  }, [gameStarted]);
+    const prevDirection = directionRef.current;
+    const isReverse =
+      prevDirection[0] + nextDirection[0] === 0 &&
+      prevDirection[1] + nextDirection[1] === 0;
+    if (isReverse) return;
+
+    directionRef.current = nextDirection;
+    setDirection(nextDirection);
+    if (!gameStartedRef.current) {
+      gameStartedRef.current = true;
+      setGameStarted(true);
+    }
+  }, []);
 
   // Manejar teclas
   const handleKeyPress = useCallback((e) => {
@@ -125,12 +128,15 @@ const SnakeGame = () => {
         changeDirection([1, 0]);
         break;
       case ' ':
-        if (!gameStarted) setGameStarted(true);
+        if (!gameStartedRef.current) {
+          gameStartedRef.current = true;
+          setGameStarted(true);
+        }
         break;
       default:
         break;
     }
-  }, [changeDirection, gameStarted]);
+  }, [changeDirection]);
 
   // Ajustar tamaño del canvas
   const resizeCanvas = useCallback(() => {
@@ -213,6 +219,22 @@ const SnakeGame = () => {
     };
   }, [gameStarted, gameOver, moveSnake]);
 
+  useEffect(() => {
+    directionRef.current = direction;
+  }, [direction]);
+
+  useEffect(() => {
+    foodRef.current = food;
+  }, [food]);
+
+  useEffect(() => {
+    gameOverRef.current = gameOver;
+  }, [gameOver]);
+
+  useEffect(() => {
+    gameStartedRef.current = gameStarted;
+  }, [gameStarted]);
+
   // Renderizar en cada frame
   useEffect(() => {
     renderGame();
@@ -244,6 +266,10 @@ const SnakeGame = () => {
     setGameOver(false);
     setScore(0);
     setGameStarted(false);
+    foodRef.current = [15, 15];
+    directionRef.current = [0, 1];
+    gameOverRef.current = false;
+    gameStartedRef.current = false;
   };
 
   return (
