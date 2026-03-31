@@ -13,6 +13,12 @@ const SnakeGame = () => {
   const [direction, setDirection] = useState([0, 1]);
   const [gameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(0);
+  const [highScore, setHighScore] = useState(() => {
+    if (typeof window === 'undefined') return 0;
+    const stored = window.localStorage.getItem('snake-high-score');
+    const parsed = Number.parseInt(stored ?? '0', 10);
+    return Number.isFinite(parsed) ? parsed : 0;
+  });
   const [gameStarted, setGameStarted] = useState(false);
   const gameLoopRef = useRef();
   const canvasRef = useRef(null);
@@ -235,6 +241,14 @@ const SnakeGame = () => {
     gameStartedRef.current = gameStarted;
   }, [gameStarted]);
 
+  useEffect(() => {
+    if (score <= highScore) return;
+    setHighScore(score);
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem('snake-high-score', String(score));
+    }
+  }, [score, highScore]);
+
   // Renderizar en cada frame
   useEffect(() => {
     renderGame();
@@ -278,6 +292,7 @@ const SnakeGame = () => {
         <h1 className="snake-game-title">Snake Game</h1>
         <div className="snake-game-info">
           <span className="snake-game-score">Score: {score}</span>
+          <span className="snake-game-high-score">High Score: {highScore}</span>
           {gameOver && <span className="snake-game-over">Game Over!</span>}
         </div>
       </div>

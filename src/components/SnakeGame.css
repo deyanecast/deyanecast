@@ -66,6 +66,11 @@
   font-weight: bold;
 }
 
+.snake-game-high-score {
+  color: color-mix(in oklab, var(--sg-accent) 78%, #b8860b 22%);
+  font-weight: bold;
+}
+
 .snake-game-over {
   color: var(--sg-danger);
   font-weight: bold;
