@@ -17,6 +17,7 @@ const SnakeGame = () => {
   const [gameStarted, setGameStarted] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [fullscreenEnabled, setFullscreenEnabled] = useState(true);
+  const [isFocusMode, setIsFocusMode] = useState(false);
   const gameLoopRef = useRef();
   const canvasRef = useRef(null);
 
@@ -239,18 +240,35 @@ const SnakeGame = () => {
   }, []);
 
   const toggleFullscreen = async () => {
-    if (!fullscreenEnabled || !gameContainerRef.current) return;
+    if (!gameContainerRef.current) return;
+
+    if (!fullscreenEnabled) {
+      setIsFocusMode((prev) => !prev);
+      return;
+    }
 
     try {
       if (!document.fullscreenElement) {
+        setIsFocusMode(false);
         await gameContainerRef.current.requestFullscreen();
       } else {
         await document.exitFullscreen();
       }
     } catch (err) {
-      setFullscreenEnabled(false);
+      setIsFocusMode((prev) => !prev);
     }
   };
+
+  const handleDirectionInput = useCallback(
+    (nextDirection, event) => {
+      if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      changeDirection(nextDirection);
+    },
+    [changeDirection]
+  );
 
   // Reiniciar juego
   const restartGame = () => {
@@ -263,15 +281,15 @@ const SnakeGame = () => {
   };
 
   return (
-    <div className="snake-game-container" ref={gameContainerRef}>
-      {isTouchDevice && fullscreenEnabled && (
+    <div className={`snake-game-container ${isFocusMode ? 'snake-game-container--focus' : ''}`.trim()} ref={gameContainerRef}>
+      {isTouchDevice && (
         <button
           type="button"
           className="snake-fullscreen-btn"
           onClick={toggleFullscreen}
-          aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
+          aria-label={isFullscreen || isFocusMode ? 'Exit fullscreen mode' : 'Enter fullscreen mode'}
         >
-          {isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
+          {isFullscreen || isFocusMode ? 'Exit Fullscreen' : fullscreenEnabled ? 'Fullscreen' : 'Focus Mode'}
         </button>
       )}
       <div className="snake-game-header">
@@ -306,10 +324,10 @@ const SnakeGame = () => {
       </div>
 
       <div className="snake-game-touch-controls" aria-label="Touch controls">
-        <button type="button" onClick={() => changeDirection([0, -1])} className="touch-btn touch-up" aria-label="Move up">▲</button>
-        <button type="button" onClick={() => changeDirection([-1, 0])} className="touch-btn touch-left" aria-label="Move left">◀</button>
-        <button type="button" onClick={() => changeDirection([1, 0])} className="touch-btn touch-right" aria-label="Move right">▶</button>
-        <button type="button" onClick={() => changeDirection([0, 1])} className="touch-btn touch-down" aria-label="Move down">▼</button>
+        <button type="button" onPointerDown={(e) => handleDirectionInput([0, -1], e)} onTouchStart={(e) => handleDirectionInput([0, -1], e)} className="touch-btn touch-up" aria-label="Move up">▲</button>
+        <button type="button" onPointerDown={(e) => handleDirectionInput([-1, 0], e)} onTouchStart={(e) => handleDirectionInput([-1, 0], e)} className="touch-btn touch-left" aria-label="Move left">◀</button>
+        <button type="button" onPointerDown={(e) => handleDirectionInput([1, 0], e)} onTouchStart={(e) => handleDirectionInput([1, 0], e)} className="touch-btn touch-right" aria-label="Move right">▶</button>
+        <button type="button" onPointerDown={(e) => handleDirectionInput([0, 1], e)} onTouchStart={(e) => handleDirectionInput([0, 1], e)} className="touch-btn touch-down" aria-label="Move down">▼</button>
       </div>
       
       <div className="snake-game-controls">
