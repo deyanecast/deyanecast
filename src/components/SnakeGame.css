@@ -184,7 +184,9 @@
 /* Responsive breakpoints */
 @media (max-width: 768px) {
   .snake-game-container {
-    padding: calc(env(safe-area-inset-top) + 4.2rem) 0.8rem calc(7.8rem + env(safe-area-inset-bottom));
+    justify-content: flex-start;
+    gap: 0.8rem;
+    padding: calc(env(safe-area-inset-top) + 4.2rem) 0.8rem calc(7.6rem + env(safe-area-inset-bottom));
   }
   
   .snake-game-header {
@@ -197,8 +199,8 @@
   }
   
   .snake-game-canvas {
-    width: min(88vw, 52vh, 350px);
-    height: min(88vw, 52vh, 350px);
+    width: min(96vw, 68vh, 420px);
+    height: min(96vw, 68vh, 420px);
   }
 
   .snake-game-touch-controls {
@@ -208,10 +210,12 @@
     gap: 0.7rem;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    max-width: 340px;
-    margin-top: 0.35rem;
-    margin-bottom: 0.15rem;
+    width: max-content;
+    position: fixed;
+    left: 50%;
+    bottom: calc(env(safe-area-inset-bottom) + 0.75rem);
+    transform: translateX(-50%);
+    z-index: 1150;
   }
 
   .touch-btn {
@@ -241,11 +245,15 @@
   .touch-left { grid-column: 1; grid-row: 2; }
   .touch-right { grid-column: 3; grid-row: 2; }
   .touch-down { grid-column: 2; grid-row: 2; }
+
+  .snake-game-controls {
+    display: none;
+  }
 }
 
 @media (max-width: 480px) {
   .snake-game-container {
-    padding: calc(env(safe-area-inset-top) + 4.5rem) 0.45rem calc(8.2rem + env(safe-area-inset-bottom));
+    padding: calc(env(safe-area-inset-top) + 4.5rem) 0.45rem calc(7.8rem + env(safe-area-inset-bottom));
   }
   
   .snake-game-title {
@@ -253,8 +261,8 @@
   }
   
   .snake-game-canvas {
-    width: min(94vw, 52vh, 330px);
-    height: min(94vw, 52vh, 330px);
+    width: min(96vw, 62vh, 390px);
+    height: min(96vw, 62vh, 390px);
   }
 
   .snake-game-overlay,
@@ -278,7 +286,7 @@
   .snake-game-touch-controls {
     grid-template-columns: repeat(3, minmax(64px, 76px));
     grid-template-rows: repeat(2, minmax(64px, 76px));
-    gap: 0.65rem;
+    gap: 0.55rem;
   }
 
   .touch-btn {

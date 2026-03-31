@@ -4,6 +4,7 @@ import { useTheme } from '../context/ThemeContext';
 
 const SnakeGame = () => {
   const { theme } = useTheme();
+  const isTouchDevice = useMemo(() => globalThis.matchMedia('(pointer: coarse)').matches, []);
   const [snake, setSnake] = useState([[10, 10]]);
   const [food, setFood] = useState([15, 15]);
   const [direction, setDirection] = useState([0, 1]);
@@ -249,7 +250,7 @@ const SnakeGame = () => {
         
         {!gameStarted && (
           <div className="snake-game-start-overlay">
-            <p>Press any arrow key to start</p>
+            <p>{isTouchDevice ? 'Tap any direction to start' : 'Press any arrow key to start'}</p>
           </div>
         )}
         
