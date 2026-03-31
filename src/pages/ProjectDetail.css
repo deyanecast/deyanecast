@@ -1,0 +1,101 @@
+.project-detail-container {
+  height: 100%;
+  min-height: 0;
+  width: 100%;
+  background: var(--background);
+  color: var(--text-primary);
+  overflow: hidden;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.project-detail-header {
+  position: absolute;
+  top: clamp(0.8rem, 2.4vh, 1.4rem);
+  left: clamp(0.9rem, 2.8vw, 1.4rem);
+  z-index: 8;
+}
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: color-mix(in oklab, var(--background) 92%, var(--text-primary) 8%);
+  color: var(--text-primary);
+  text-decoration: none;
+  border-radius: 8px;
+  border: 1px solid var(--accent-color);
+  transition: all 0.3s ease;
+  font-family: var(--font-body);
+  font-weight: 500;
+}
+
+.back-button:hover {
+  background: color-mix(in oklab, var(--background) 70%, var(--text-primary) 30%);
+  transform: translateX(-5px);
+}
+
+[data-theme='dark'] .back-button {
+  background: color-mix(in oklab, #121212 78%, #ffffff 22%);
+  border-color: #5f5f5f;
+}
+
+[data-theme='dark'] .back-button:hover {
+  background: color-mix(in oklab, #121212 65%, #ffffff 35%);
+}
+
+.project-detail-content {
+  padding: clamp(1rem, 3vw, 2rem);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.project-detail-content h1 {
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+}
+
+.project-detail-content p {
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.project-detail-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  background: var(--secondary-color);
+  border-radius: 12px;
+  border: 1px solid var(--accent-color);
+}
+
+.project-detail-placeholder p {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  color: var(--text-secondary);
+  text-align: center;
+  margin: 0;
+}
+
+.back-to-projects {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  background: var(--primary-color);
+  color: var(--background);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.back-to-projects:hover {
+  background: var(--accent-color);
+  transform: translateY(-2px);
+} 

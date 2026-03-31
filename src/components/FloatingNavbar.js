@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
 import './FloatingNavbar.css';
 
 const FloatingNavbar = () => {
@@ -13,25 +12,25 @@ const FloatingNavbar = () => {
           to="/" 
           className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
         >
-          <FormattedMessage id="nav.home" defaultMessage="Home" />
+          Home
         </Link>
         <Link 
           to="/about" 
           className={`nav-link ${location.pathname === '/about' ? 'active' : ''}`}
         >
-          <FormattedMessage id="nav.about" />
+          About
         </Link>
         <Link 
           to="/projects" 
           className={`nav-link ${location.pathname === '/projects' ? 'active' : ''}`}
         >
-          <FormattedMessage id="nav.projects" />
+          Projects
         </Link>
         <Link 
           to="/contact" 
           className={`nav-link ${location.pathname === '/contact' ? 'active' : ''}`}
         >
-          <FormattedMessage id="nav.contact" />
+          Contact
         </Link>
       </div>
     </nav>

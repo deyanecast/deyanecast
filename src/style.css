@@ -2,7 +2,7 @@
 
 :root {
   --primary-color: #2c2c2c;
-  --secondary-color: #4a4a4a;
+  --secondary-color: #f1f3f5;
   --accent-color: #666666;
   --background: #ffffff;
   --text-primary: #333333;
@@ -11,6 +11,12 @@
   --container-padding: clamp(1rem, 5vw, 2rem);
   --font-heading: 'Playfair Display', serif;
   --font-body: 'Lora', serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
 }
 
 [data-theme='dark'] {
@@ -34,31 +40,42 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: var(--background);
-  min-height: 100vh;
+  height: 100%;
   color: var(--text-primary);
-  line-height: 2;
+  line-height: 1.6;
   letter-spacing: 0.02em;
-  padding-top: var(--navbar-height);
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .App {
-  min-height: 100vh;
+  height: 100dvh;
+  min-height: 100dvh;
   position: relative;
+  overflow: hidden;
+}
+
+.page-transition-shell {
+  height: 100%;
 }
 
 .content {
-  padding-bottom: 100px;
+  height: 100%;
+  padding: 0 clamp(1rem, 4vw, 2rem);
+  overflow: hidden;
 }
 
-/* Language Toggle Button */
-.language-toggle, .theme-toggle {
+.content--full-bleed {
+  padding: 0;
+}
+
+/* Theme toggle button */
+.theme-toggle {
   position: fixed;
   top: 30px;
   background: rgba(255, 255, 255, 0.95);
   border: 1px solid var(--accent-color);
-  border-radius: 4px;
-  padding: 10px 20px;
+  border-radius: 999px;
+  padding: 0.65rem 0.85rem;
   font-weight: 400;
   cursor: pointer;
   font-family: var(--font-body);
@@ -67,35 +84,33 @@ body {
   transition: all 0.3s ease;
   z-index: 1001;
   backdrop-filter: blur(10px);
-  min-width: 48px;
-  min-height: 48px;
+  min-width: 44px;
+  min-height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.language-toggle {
+.theme-toggle {
   right: 30px;
 }
 
-.theme-toggle {
-  right: 90px;
-}
-
-.language-toggle:hover, .theme-toggle:hover {
+.theme-toggle:hover {
   background: var(--text-primary);
   color: var(--background);
+  transform: translateY(-1px);
 }
 
 /* Home Component - Diseño tipo periódico */
 .home-container {
-  min-height: 100vh;
-  width: 100vw;
+  height: 100%;
+  min-height: 0;
+  width: 100%;
   background: var(--background);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem 0;
+  padding: clamp(0.75rem, 2vh, 1.5rem) 0 clamp(4.5rem, 8vh, 5.5rem);
 }
 
 .quadrant-content {
@@ -108,8 +123,12 @@ body {
   font-weight: 200;
   text-align: center;
   padding: 2rem;
-  max-width: 800px;
+  max-width: 900px;
   width: 100%;
+  border: 1px solid var(--accent-color);
+  border-radius: 18px;
+  background: color-mix(in oklab, var(--background) 92%, var(--text-primary) 8%);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
 }
 
 .info-block {
@@ -121,12 +140,12 @@ body {
 
 .info-line {
   font-family: var(--font-heading);
-  font-size: 1rem;
+  font-size: clamp(1.05rem, 2.5vw, 1.4rem);
   letter-spacing: 0.15em;
   color: var(--text-primary);
   white-space: nowrap;
   line-height: 1.5;
-  font-weight: 200;
+  font-weight: 500;
   text-align: center;
 }
 
@@ -166,13 +185,14 @@ body {
 
 /* About Component */
 .about-container {
-  min-height: 100vh;
-  width: 100vw;
+  height: 100%;
+  min-height: 0;
+  width: 100%;
   background: var(--background);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem 0;
+  padding: clamp(0.75rem, 2vh, 1.5rem) 0 clamp(4.5rem, 8vh, 5.5rem);
 }
 
 .about-content {
@@ -180,10 +200,12 @@ body {
   background: var(--background);
   max-width: 900px;
   width: 100%;
-  min-height: 340px;
+  min-height: 420px;
   overflow: hidden;
   border: 1px solid var(--accent-color);
+  border-radius: 18px;
   padding: 2rem;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
 }
 
 .about-text {
@@ -205,7 +227,7 @@ body {
 }
 
 .about-title {
-  font-size: 2.6rem;
+  font-size: clamp(2rem, 6vw, 2.6rem);
   font-weight: 800;
   margin: 0.2em 0 0.3em 0;
   letter-spacing: 0.01em;
@@ -214,9 +236,9 @@ body {
 }
 
 .about-description {
-  font-size: 1.15rem;
+  font-size: 1.06rem;
   color: var(--text-secondary);
-  font-style: italic;
+  font-style: normal;
   margin-bottom: 1.2em;
   font-family: var(--font-body);
 }
@@ -252,24 +274,31 @@ body {
 
 /* Gallery Page */
 .gallery-page {
-  min-height: 100vh;
-  width: 100vw;
+  height: 100%;
+  min-height: 0;
+  width: 100%;
   background: var(--background);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem 0;
+  padding: clamp(0.75rem, 2vh, 1.5rem) 0 clamp(4.5rem, 8vh, 5.5rem);
+  overflow: hidden;
 }
 
 .gallery-header {
   display: flex;
+  flex-direction: column;
   background: var(--background);
   max-width: 900px;
   width: 100%;
   min-height: 340px;
   overflow: hidden;
   border: 1px solid var(--accent-color);
+  border-radius: 18px;
   padding: 2rem;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+  margin-bottom: 1.25rem;
 }
 
 .gallery-section {
@@ -283,7 +312,7 @@ body {
 }
 
 .gallery-title {
-  font-size: 2.6rem;
+  font-size: clamp(2rem, 6vw, 2.6rem);
   font-weight: 800;
   margin: 0.2em 0 0.3em 0;
   letter-spacing: 0.01em;
@@ -301,13 +330,14 @@ body {
 
 /* Contact Component */
 .contact-container {
-  min-height: 100vh;
-  width: 100vw;
+  height: 100%;
+  min-height: 0;
+  width: 100%;
   background: var(--background);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem 0;
+  padding: clamp(0.75rem, 2vh, 1.5rem) 0 clamp(4.5rem, 8vh, 5.5rem);
 }
 
 .contact-content {
@@ -315,10 +345,12 @@ body {
   background: var(--background);
   max-width: 900px;
   width: 100%;
-  min-height: 340px;
+  min-height: 420px;
   overflow: hidden;
   border: 1px solid var(--accent-color);
+  border-radius: 18px;
   padding: 2rem;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
 }
 
 .contact-section {
@@ -332,7 +364,7 @@ body {
 }
 
 .contact-title {
-  font-size: 2.6rem;
+  font-size: clamp(2rem, 6vw, 2.6rem);
   font-weight: 800;
   margin: 0.2em 0 0.3em 0;
   letter-spacing: 0.01em;
@@ -341,7 +373,7 @@ body {
 }
 
 .contact-subtitle {
-  font-size: 1.15rem;
+  font-size: 1.06rem;
   color: var(--text-secondary);
   font-style: italic;
   margin-bottom: 1.2em;
@@ -436,8 +468,9 @@ body {
 .social-links a {
   color: var(--text-primary);
   text-decoration: none;
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1rem;
   border: 1px solid var(--accent-color);
+  border-radius: 999px;
   transition: all 0.3s ease;
   font-family: var(--font-body);
 }
@@ -445,6 +478,7 @@ body {
 .social-links a:hover {
   background: var(--text-primary);
   color: var(--background);
+  transform: translateY(-1px);
 }
 
 /* Floating Navbar */
@@ -510,7 +544,7 @@ body {
     grid-template-columns: 1fr;
   }
 
-  .language-toggle {
+  .theme-toggle {
     top: 20px;
     right: 20px;
     padding: 6px 12px;
@@ -560,14 +594,32 @@ body {
   }
 }
 
-[data-theme='dark'] .language-toggle,
 [data-theme='dark'] .theme-toggle {
   background: rgba(30, 30, 30, 0.95);
   color: #f5f5f5;
   border: 1px solid #757575;
 }
-[data-theme='dark'] .language-toggle:hover,
 [data-theme='dark'] .theme-toggle:hover {
   background: #f5f5f5;
   color: #181818;
 } 
+
+/* Typewriter cursor blink */
+.cursor {
+  display: inline-block;
+  margin-left: 1px;
+  font-weight: 300;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+[data-theme='dark'] .quadrant-content,
+[data-theme='dark'] .about-content,
+[data-theme='dark'] .gallery-header,
+[data-theme='dark'] .contact-content {
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+}

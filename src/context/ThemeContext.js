@@ -5,16 +5,16 @@ const ThemeContext = createContext();
 export const useTheme = () => useContext(ThemeContext);
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('theme') || 'light';
+  });
 
   useEffect(() => {
-    console.log('Aplicando tema:', theme);
     document.body.setAttribute('data-theme', theme);
-    console.log('Atributo data-theme aplicado:', document.body.getAttribute('data-theme'));
+    localStorage.setItem('theme', theme);
   }, [theme]);
 
   const toggleTheme = () => {
-    console.log('Cambiando tema de', theme, 'a', theme === 'light' ? 'dark' : 'light');
     setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
   };
 
@@ -23,4 +23,4 @@ export const ThemeProvider = ({ children }) => {
       {children}
     </ThemeContext.Provider>
   );
-}; 
+};
