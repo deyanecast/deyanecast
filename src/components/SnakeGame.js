@@ -8,16 +8,12 @@ const SnakeGame = () => {
     () => typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches,
     []
   );
-  const gameContainerRef = useRef(null);
   const [snake, setSnake] = useState([[10, 10]]);
   const [food, setFood] = useState([15, 15]);
   const [direction, setDirection] = useState([0, 1]);
   const [gameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(0);
   const [gameStarted, setGameStarted] = useState(false);
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  const [fullscreenEnabled, setFullscreenEnabled] = useState(true);
-  const [isFocusMode, setIsFocusMode] = useState(false);
   const gameLoopRef = useRef();
   const canvasRef = useRef(null);
 
@@ -229,36 +225,6 @@ const SnakeGame = () => {
     return () => window.removeEventListener('resize', resizeCanvas);
   }, [resizeCanvas]);
 
-  useEffect(() => {
-    const onFullscreenChange = () => {
-      setIsFullscreen(Boolean(document.fullscreenElement));
-    };
-
-    setFullscreenEnabled(Boolean(document.fullscreenEnabled));
-    document.addEventListener('fullscreenchange', onFullscreenChange);
-    return () => document.removeEventListener('fullscreenchange', onFullscreenChange);
-  }, []);
-
-  const toggleFullscreen = async () => {
-    if (!gameContainerRef.current) return;
-
-    if (!fullscreenEnabled) {
-      setIsFocusMode((prev) => !prev);
-      return;
-    }
-
-    try {
-      if (!document.fullscreenElement) {
-        setIsFocusMode(false);
-        await gameContainerRef.current.requestFullscreen();
-      } else {
-        await document.exitFullscreen();
-      }
-    } catch (err) {
-      setIsFocusMode((prev) => !prev);
-    }
-  };
-
   const handleDirectionInput = useCallback(
     (nextDirection, event) => {
       if (event) {
@@ -281,17 +247,7 @@ const SnakeGame = () => {
   };
 
   return (
-    <div className={`snake-game-container ${isFocusMode ? 'snake-game-container--focus' : ''}`.trim()} ref={gameContainerRef}>
-      {isTouchDevice && (
-        <button
-          type="button"
-          className="snake-fullscreen-btn"
-          onClick={toggleFullscreen}
-          aria-label={isFullscreen || isFocusMode ? 'Exit fullscreen mode' : 'Enter fullscreen mode'}
-        >
-          {isFullscreen || isFocusMode ? 'Exit Fullscreen' : fullscreenEnabled ? 'Fullscreen' : 'Focus Mode'}
-        </button>
-      )}
+    <div className="snake-game-container">
       <div className="snake-game-header">
         <h1 className="snake-game-title">Snake Game</h1>
         <div className="snake-game-info">
@@ -324,10 +280,10 @@ const SnakeGame = () => {
       </div>
 
       <div className="snake-game-touch-controls" aria-label="Touch controls">
-        <button type="button" onPointerDown={(e) => handleDirectionInput([0, -1], e)} onTouchStart={(e) => handleDirectionInput([0, -1], e)} className="touch-btn touch-up" aria-label="Move up">▲</button>
-        <button type="button" onPointerDown={(e) => handleDirectionInput([-1, 0], e)} onTouchStart={(e) => handleDirectionInput([-1, 0], e)} className="touch-btn touch-left" aria-label="Move left">◀</button>
-        <button type="button" onPointerDown={(e) => handleDirectionInput([1, 0], e)} onTouchStart={(e) => handleDirectionInput([1, 0], e)} className="touch-btn touch-right" aria-label="Move right">▶</button>
-        <button type="button" onPointerDown={(e) => handleDirectionInput([0, 1], e)} onTouchStart={(e) => handleDirectionInput([0, 1], e)} className="touch-btn touch-down" aria-label="Move down">▼</button>
+        <button type="button" onPointerDown={(e) => handleDirectionInput([0, -1], e)} className="touch-btn touch-up" aria-label="Move up">▲</button>
+        <button type="button" onPointerDown={(e) => handleDirectionInput([-1, 0], e)} className="touch-btn touch-left" aria-label="Move left">◀</button>
+        <button type="button" onPointerDown={(e) => handleDirectionInput([1, 0], e)} className="touch-btn touch-right" aria-label="Move right">▶</button>
+        <button type="button" onPointerDown={(e) => handleDirectionInput([0, 1], e)} className="touch-btn touch-down" aria-label="Move down">▼</button>
       </div>
       
       <div className="snake-game-controls">
