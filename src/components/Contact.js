@@ -33,7 +33,7 @@ const Contact = () => {
           <div className="contact-alternative">
             <h3>You can also find me on:</h3>
             <div className="social-links">
-            <a href="https://mail.google.com/mail/u/1/#inbox" target="_blank" rel="noopener noreferrer">
+            <a href="mailto:deyanecast@gmail.com">
                 Email
               </a>
               <a href="https://linkedin.com/in/deyanecast" target="_blank" rel="noopener noreferrer">

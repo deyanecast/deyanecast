@@ -25,15 +25,18 @@ const About = () => {
         <div className="about-text">
           <h2 className="about-title">About Me</h2>
           <p className="about-description">
-            I am a full stack developer experienced in modern technologies and agile methodologies.
-            I specialize in building scalable and high-performance web applications.
+            I&rsquo;m a full stack developer who cares about the details &mdash; from database
+            queries that don&rsquo;t waste a millisecond to interfaces that feel intuitive on the
+            first click. I enjoy turning messy problems into clean, maintainable code and shipping
+            things that actually work in the real world.
           </p>
           <div className="about-skills">
-            <h3>Skills</h3>
+            <h3>What I work with</h3>
             <ul>
-              <li>React, Node.js, TypeScript</li>
-              <li>SQL and NoSQL Databases</li>
-              <li>Responsive Design and UX/UI</li>
+              <li>React &middot; Node.js &middot; TypeScript</li>
+              <li>SQL &amp; NoSQL databases</li>
+              <li>Responsive design &amp; UX/UI</li>
+              <li>REST APIs &amp; real-time systems</li>
             </ul>
           </div>
         </div>
