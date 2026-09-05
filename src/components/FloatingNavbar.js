@@ -22,7 +22,7 @@ const FloatingNavbar = () => {
         </Link>
         <Link 
           to="/projects" 
-          className={`nav-link ${location.pathname === '/projects' ? 'active' : ''}`}
+          className={`nav-link ${location.pathname.startsWith('/projects') ? 'active' : ''}`}
         >
           Projects
         </Link>
